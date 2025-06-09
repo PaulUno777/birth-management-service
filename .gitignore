@@ -15,6 +15,7 @@ application-local.yml
 .sts4-cache
 
 ### IntelliJ IDEA ###
+.vscode
 .idea
 *.iws
 *.iml

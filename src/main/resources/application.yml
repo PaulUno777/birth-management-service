@@ -1,3 +1,7 @@
 spring:
   application:
     name: birth-management-service
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
