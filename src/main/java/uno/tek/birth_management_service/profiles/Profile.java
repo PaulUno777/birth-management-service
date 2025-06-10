@@ -21,11 +21,11 @@ public class Profile extends BaseEntity {
     private Civility civility;
 
     @NotBlank
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String firstName;
 
     @NotBlank
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String lastName;
 
     @Email
@@ -41,7 +41,6 @@ public class Profile extends BaseEntity {
     private String password;
 
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH })
-    @JoinColumn(name = "address_id")
     private Address address;
 
     // @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.DETACH })

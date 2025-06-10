@@ -16,11 +16,13 @@ public class Address extends BaseEntity {
     @Column(nullable = true, length = 30)
     private String zip;
 
+    @Column(nullable = true, length = 30)
+    private String tag;
+
     private String street;
 
     private String city;
 
     @Column(length = 100)
     private String country;
-
 }

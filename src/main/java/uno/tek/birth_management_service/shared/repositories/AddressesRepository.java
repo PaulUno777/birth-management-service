@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import uno.tek.birth_management_service.shared.entities.Address;
 
 @Repository
-public interface AddressesRepository extends JpaRepository<Address, Long> {
+public interface AddressesRepository extends JpaRepository<Address, Integer> {
 }

@@ -39,7 +39,7 @@ public class ProfilesService {
         return this.profilesRepository.findAll();
     }
 
-    public Profile findById(long id) {
+    public Profile findById(int id) {
         log.info("Finding a profile");
         Optional<Profile> profile = this.profilesRepository.findById(id);
         return profile.orElseThrow(

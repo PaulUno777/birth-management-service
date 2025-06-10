@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

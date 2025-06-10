@@ -11,13 +11,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "addresses")
+@Table(name = "roles")
 public class Role extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false, length = 50)
     private RoleName name;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "is_active", nullable = false)
