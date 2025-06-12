@@ -2,7 +2,7 @@ package uno.tek.birth_management_service.profiles;
 
 import lombok.AllArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +16,8 @@ public class ProfilesController {
 
     private final ProfilesService profileService;
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Profile profile) {
-        this.profileService.create(profile);
-    }
-
     @GetMapping
-    public List<Profile> findAll() {
+    public Set<ProfileDTO> findAll() {
         return this.profileService.findAll();
     }
 

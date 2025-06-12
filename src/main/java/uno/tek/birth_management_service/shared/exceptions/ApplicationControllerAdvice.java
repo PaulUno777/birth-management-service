@@ -16,9 +16,22 @@ import jakarta.persistence.EntityNotFoundException;
 @Slf4j
 @ControllerAdvice
 public class ApplicationControllerAdvice {
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex) {
+        log.error("Illegal Argument exception occurred", ex.getMessage(), ex);
+
+        ErrorResponse body = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                "BAD_REQUEST",
+                ex.getMessage(),
+                null);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex) {
-        log.error("Unhandled exception occurred", ex);
+        log.error("Unhandled exception occurred", ex.getMessage(), ex);
 
         ErrorResponse body = new ErrorResponse(
                 LocalDateTime.now(),
@@ -31,6 +44,8 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(RuntimeException ex) {
+        log.error("Runtime exception occurred", ex.getMessage(), ex);
+
         ErrorResponse body = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.BAD_REQUEST.value(),

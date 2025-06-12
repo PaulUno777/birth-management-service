@@ -8,8 +8,8 @@ import uno.tek.birth_management_service.shared.repositories.AddressesRepository;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service
 @AllArgsConstructor
+@Service
 public class AddressesService {
     private final AddressesRepository addressesRepository;
 

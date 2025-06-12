@@ -3,12 +3,14 @@ package uno.tek.birth_management_service.profiles;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uno.tek.birth_management_service.shared.entities.Address;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import uno.tek.birth_management_service.shared.services.AddressesService;
 import uno.tek.birth_management_service.shared.services.ValidationService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -19,24 +21,14 @@ public class ProfilesService {
     private final AddressesService addressesService;
     private final ProfilesRepository profilesRepository;
     private final ValidationService validationService;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final ProfileMapper profileMapper;
 
-    public void create(Profile profile) {
-        log.info("Creating new profile");
-
-        validationService.validateUniqueEmail(profile.getEmail());
-        validationService.validateUniquePhone(profile.getPhone());
-
-        if (profile.getAddress() != null) {
-            Address address = addressesService.create(profile.getAddress());
-            profile.setAddress(address);
-        }
-
-        this.profilesRepository.save(profile);
-    }
-
-    public List<Profile> findAll() {
+    public Set<ProfileDTO> findAll() {
         log.info("Finding all profiles");
-        return this.profilesRepository.findAll();
+        List<Profile> profiles = profilesRepository.findAll();
+
+        return profiles.stream().map(profileMapper::toDto).collect(Collectors.toSet());
     }
 
     public Profile findById(int id) {

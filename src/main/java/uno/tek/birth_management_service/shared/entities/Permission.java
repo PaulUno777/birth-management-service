@@ -14,24 +14,16 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "roles")
-public class Role extends BaseEntity{
-    @Enumerated(EnumType.STRING)
+@Table(name = "permissions")
+public class Permission extends BaseEntity{
     @Column(unique = true, nullable = false, length = 50)
-    private RoleName name;
+    private String name;
 
     private String description;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "role_permissions",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id")
-    )
-    private Set<Permission> permissions = new HashSet<>();
+    @ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY)
+    private Set<Role> roles = new HashSet<>();
 }
-
-
